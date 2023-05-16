@@ -74,30 +74,125 @@ function magnify(imgID, zoom) {
 
 
 
-var INTERP_BASE = "./static/images/interpolate/seed"//"https:/xxx/interpolation/stacked";
-var NUM_INTERP_FRAMES = 98;
+var INTERP_BASEFFHQ = "./static/images/interpolate_ffhq/interpolation_"//"https:/xxx/interpolation/stacked";
+var NUM_INTERP_FRAMES = 50;
 // var INTERP_BASE = "https://homes.cs.washington.edu/~kpar/nerfies/interpolation/stacked";
 
+var INTERP_BASEFFHQGEO = "./static/images/interpolate_ffhq_geo/"//"https:/xxx/interpolation/stacked";
+var NUM_INTERP_FRAMES = 50;
 
-var interp_images = [];
-function preloadInterpolationImages() {
+var INTERP_BASEAFHQ = "./static/images/interpolate_afhq/interpolation_"//"https:/xxx/interpolation/stacked";
+var NUM_INTERP_FRAMES = 50;
+
+var INTERP_BASEAFHQGEO = "./static/images/interpolate_afhq_geo/"//"https:/xxx/interpolation/stacked";
+var NUM_INTERP_FRAMES = 50;
+
+var INTERP_BASESHHQ = "./static/images/interpolate_shhq/interpolation_"//"https:/xxx/interpolation/stacked";
+var NUM_INTERP_FRAMES = 50;
+
+var INTERP_BASESHHQGEO = "./static/images/interpolate_shhq_geo/"//"https:/xxx/interpolation/stacked";
+var NUM_INTERP_FRAMES = 50;
+
+var interp_images_ffhq = [];
+var interp_images_ffhq_geo = [];
+var interp_images_afhq = [];
+var interp_images_afhq_geo = [];
+var interp_images_shhq = [];
+var interp_images_shhq_geo = [];
+
+function preloadInterpolationImagesFFHQ() {
   for (var i = 1; i < NUM_INTERP_FRAMES; i++) {
-    if (i == 35 || i == 43)
-      i++;
-    else{
-      var path = INTERP_BASE + String(i).padStart(4, '0') + '.png';
+      var path = INTERP_BASEFFHQ + String(i).padStart(3, '0') + '.png';
     // var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
-      interp_images[i] = new Image();
-      interp_images[i].src = path;
-    }
+      interp_images_ffhq[i] = new Image();
+      interp_images_ffhq[i].src = path;
   }
 }
 
-function setInterpolationImage(i) {
-  var image = interp_images[i];
+function preloadInterpolationImagesFFHQ_GEO() {
+  for (var i = 1; i < NUM_INTERP_FRAMES; i++) {
+      var path = INTERP_BASEFFHQGEO + String(i).padStart(3, '0') + '.png';
+    // var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
+      interp_images_ffhq_geo[i] = new Image();
+      interp_images_ffhq_geo[i].src = path;
+  }
+}
+
+function preloadInterpolationImagesAFHQ() {
+  for (var i = 1; i < NUM_INTERP_FRAMES; i++) {
+      var path = INTERP_BASEAFHQ + String(i).padStart(3, '0') + '.png';
+    // var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
+      interp_images_afhq[i] = new Image();
+      interp_images_afhq[i].src = path;
+  }
+}
+
+function preloadInterpolationImagesAFHQ_GEO() {
+  for (var i = 1; i < NUM_INTERP_FRAMES; i++) {
+      var path = INTERP_BASEAFHQGEO + String(i).padStart(3, '0') + '.png';
+    // var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
+      interp_images_afhq_geo[i] = new Image();
+      interp_images_afhq_geo[i].src = path;
+  }
+}
+
+function preloadInterpolationImagesSHHQ() {
+  for (var i = 1; i < NUM_INTERP_FRAMES; i++) {
+      var path = INTERP_BASESHHQ + String(i).padStart(3, '0') + '.png';
+    // var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
+      interp_images_shhq[i] = new Image();
+      interp_images_shhq[i].src = path;
+  }
+}
+
+function preloadInterpolationImagesSHHQ_GEO() {
+  for (var i = 1; i < NUM_INTERP_FRAMES; i++) {
+      var path = INTERP_BASESHHQGEO + String(i).padStart(3, '0') + '.png';
+    // var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
+      interp_images_shhq_geo[i] = new Image();
+      interp_images_shhq_geo[i].src = path;
+  }
+}
+
+function setInterpolationImageFFHQ(i) {
+  var image = interp_images_ffhq[i];
   image.ondragstart = function() { return false; };
   image.oncontextmenu = function() { return false; };
-  $('#interpolation-image-wrapper').empty().append(image);
+  $('#interpolation-image-wrapper-FFHQ').empty().append(image);
+}
+
+function setInterpolationImageFFHQGEO(i) {
+  var image = interp_images_ffhq_geo[i];
+  image.ondragstart = function() { return false; };
+  image.oncontextmenu = function() { return false; };
+  $('#interpolation-image-wrapper-FFHQ-GEO').empty().append(image);
+}
+
+function setInterpolationImageAFHQ(i) {
+  var image = interp_images_afhq[i];
+  image.ondragstart = function() { return false; };
+  image.oncontextmenu = function() { return false; };
+  $('#interpolation-image-wrapper-AFHQ').empty().append(image);
+}
+
+function setInterpolationImageAFHQGEO(i) {
+  var image = interp_images_afhq_geo[i];
+  image.ondragstart = function() { return false; };
+  image.oncontextmenu = function() { return false; };
+  $('#interpolation-image-wrapper-AFHQ-GEO').empty().append(image);
+}
+
+function setInterpolationImageSHHQ(i) {
+  var image = interp_images_shhq[i];
+  image.ondragstart = function() { return false; };
+  image.oncontextmenu = function() { return false; };
+  $('#interpolation-image-wrapper-SHHQ').empty().append(image);
+}
+function setInterpolationImageSHHQGEO(i) {
+  var image = interp_images_shhq_geo[i];
+  image.ondragstart = function() { return false; };
+  image.oncontextmenu = function() { return false; };
+  $('#interpolation-image-wrapper-SHHQ-GEO').empty().append(image);
 }
 
 
@@ -140,12 +235,32 @@ $(document).ready(function() {
     }
 
     // For interpolations
-    preloadInterpolationImages();
-    $('#interpolation-slider').on('input', function(event) {
-      setInterpolationImage(this.value);});
-    setInterpolationImage(50);
-    $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
+    preloadInterpolationImagesFFHQ();
+    preloadInterpolationImagesFFHQ_GEO();
+    $('#interpolation-slider-FFHQ').on('input', function(event) {
+      setInterpolationImageFFHQ(this.value);
+      setInterpolationImageFFHQGEO(this.value);});
+    setInterpolationImageFFHQ(25);
+    setInterpolationImageFFHQGEO(25);
+    $('#interpolation-slider-FFHQ').prop('max', NUM_INTERP_FRAMES - 1);
 
+    preloadInterpolationImagesAFHQ();
+    preloadInterpolationImagesAFHQ_GEO();
+    $('#interpolation-slider-AFHQ').on('input', function(event) {
+      setInterpolationImageAFHQ(this.value);
+      setInterpolationImageAFHQGEO(this.value);});
+    setInterpolationImageAFHQ(25);
+    setInterpolationImageAFHQGEO(25);
+    $('#interpolation-slider-AFHQ').prop('max', NUM_INTERP_FRAMES - 1);
+
+    preloadInterpolationImagesSHHQ();
+    preloadInterpolationImagesSHHQ_GEO();
+    $('#interpolation-slider-SHHQ').on('input', function(event) {
+      setInterpolationImageSHHQ(this.value);
+      setInterpolationImageSHHQGEO(this.value);});
+    setInterpolationImageSHHQ(25);
+    setInterpolationImageSHHQGEO(25);
+    $('#interpolation-slider-SHHQ').prop('max', NUM_INTERP_FRAMES - 1);
   
     bulmaSlider.attach();
 
